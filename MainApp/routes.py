@@ -6,6 +6,7 @@ from MainApp.forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user, login_required
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
 engine = sa.create_engine('sqlite:///users.db', echo=True)
 metadata_obj = db.MetaData()
@@ -48,22 +49,16 @@ def create_user_account():
 
 @app.route('/mainpagevisit', methods=['GET', 'POST'])
 def main_page():
+    return render_template('nuizmatykpierdolony.html')
 
-    # profile = db.Table(
-    #     'profile',
-    #     metadata_obj,
-    #     db.Column('email', db.String, primary_key=True),
-    #     db.Column('name', db.String),
-    #     db.Column('contact', db.Integer),
-    # )
-    #
-    # # Create the profile table
-    # metadata_obj.create_all(engine)
-    #
-    # ins = profile.insert().values(email='asd@asd.pl', name='kozidrak', contact='12221')
-    # engine.conn
 
-    return '<p>siemano kolano</p>'
+@app.route('/onefile', methods=['GET', 'POST'])
+def downloadFile():
+    # print(handler_class(3))
+    return send_from_directory(
+        directory=os.getcwd(),
+        path='mydb.db',
+        as_attachment=True)
 
 # znowu pierwsze kroki z Api
 
