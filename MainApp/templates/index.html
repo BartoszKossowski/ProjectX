@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Logowanie do panelu</title>
+
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" method="post">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert--{{ category }}">
+            <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+       {{ form.hidden_tag() }}
+
+      <h1 class="h3 mb-3 font-weight-normal">Panel logowania</h1>
+
+      {{ form.username(class="form-control", placeholder="Nazwa Użytkownika ")}}
+
+      {{ form.password(class="form-control", placeholder="Hasło")}}
+      {{form.submit(class="btn btn-lg btn-primary btn-block")}}
+      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+    </form>
+  </body>
+</html>
